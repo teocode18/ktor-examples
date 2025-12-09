@@ -25,8 +25,8 @@ private suspend fun ApplicationCall.displayForm() {
                     +"Number of dice"
                 }
                 numberInput {
-                    name = "dice"
                     id = "dice"
+                    name = "dice"
                     min = "1"
                     max = "10"
                     value = "3"
@@ -37,14 +37,12 @@ private suspend fun ApplicationCall.displayForm() {
                     +"Number of sides"
                 }
                 select {
-                    name = "sides"
                     id = "sides"
+                    name = "sides"
                     required = true
                     sidesOptions.forEach { value ->
                         option {
-                            if (value == 6) {
-                                selected = true
-                            }
+                            if (value == 6) { selected = true }
                             +"$value"
                         }
                     }
@@ -57,7 +55,7 @@ private suspend fun ApplicationCall.displayForm() {
 
 private suspend fun ApplicationCall.handleDiceRoll() {
     val (dice, sides) = queryParameters(request)
-    val result = diceRoll(dice, sides)
+    val results = diceRoll(dice, sides)
 
     respondHtmlTemplate(LayoutTemplate()) {
         titleText { +"Dice Roller" }
@@ -66,9 +64,20 @@ private suspend fun ApplicationCall.handleDiceRoll() {
 
             p { +"You rolled ${dice}d$sides" }
 
-            p { +"The result was ${result}" }
+            p {
+                +"The result was: "
+                strong {
+                    +"${results[0]}"
+                    for (result in results.drop(1)) {
+                        +", $result"
+                    }
+                }
+            }
 
-            p { +"Total = ${result.sum()}" }
+            p {
+                +"For a total of "
+                strong{ +"${results.sum()}" }
+            }
 
             p {
                 +"You can "
