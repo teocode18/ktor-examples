@@ -1,21 +1,13 @@
-// Database-related code
+// Functions to assist with Music Club database creation
 // (See also Tables.kt & Entities.kt)
 
 package comp2850.music.db
 
-import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
-
-const val DATABASE_URL = "jdbc:sqlite:file:music.db"
-const val TEST_DB_URL = "jdbc:sqlite:file:test.db"
-
-fun connectToDatabase() {
-    Database.connect(DATABASE_URL)
-}
 
 fun createTables() {
     transaction {
@@ -161,47 +153,4 @@ fun createTables() {
 fun createDatabase() {
     connectToDatabase()
     createTables()
-}
-
-fun connectToTestDatabase() {
-    Database.connect(TEST_DB_URL)
-}
-
-fun createTestTables() {
-    transaction {
-        SchemaUtils.drop(Artists, Albums)
-        SchemaUtils.create(Artists, Albums)
-
-        val artist1 = Artists.insert {
-            it[name] = "A Band"
-        } get Artists.id
-
-        val artist2 = Artists.insert {
-            it[name] = "Doe, John"
-            it[isSolo] = true
-        } get Artists.id
-
-        Albums.insert {
-            it[title] = "An Album"
-            it[artist] = artist1
-            it[year] = 2025
-        }
-
-        Albums.insert {
-            it[title] = "First Album"
-            it[artist] = artist2
-            it[year] = 2019
-        }
-
-        Albums.insert {
-            it[title] = "Second Album"
-            it[artist] = artist2
-            it[year] = 2023
-        }
-    }
-}
-
-fun createTestDatabase() {
-    connectToTestDatabase()
-    createTestTables()
 }
