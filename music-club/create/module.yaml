@@ -2,4 +2,4 @@ product: jvm/app
 
 dependencies:
   - ../database
-  - org.xerial:sqlite-jdbc:3.50.1.0
+  - com.h2database:h2:2.2.224

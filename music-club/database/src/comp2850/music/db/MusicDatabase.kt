@@ -10,8 +10,8 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object MusicDatabase {
-    const val URL = "jdbc:sqlite:music.db"
-    const val DRIVER = "org.sqlite.JDBC"
+    const val URL = "jdbc:h2:./music"
+    const val DRIVER = "org.h2.Driver"
 
     val db by lazy {
         Database.connect(URL, DRIVER)
