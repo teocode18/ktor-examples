@@ -44,6 +44,18 @@ start of the commands shown above.
 If you are using Windows PowerShell, invoke Amper with `.\amper.bat` instead
 of `./amper`.
 
+## Just Command Runner
+
+If you have the [Just][jst] command runner, you can run the Amper commands
+described above using
+
+    just create
+    just query
+    just serve
+
+You can use the single-letter abbreviations `c`, `q` and `s` for these
+recipes.
+
 ## Examining The Code
 
 ### Database
@@ -93,3 +105,4 @@ and specifies a server to run the application.
 [orm]: https://jetbrains.github.io/Exposed/
 [db]: https://www.h2database.com/
 [amp]: https://amper.org/
+[jst]: https://github.com/casey/just
