@@ -5,15 +5,22 @@ package comp2850.music.server
 import comp2850.music.db.MusicDatabase
 import comp2850.music.db.TestDatabase
 import io.ktor.server.application.Application
+import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
+
+// Main config for application
 
 fun Application.module() {
+    TransactionManager.defaultDatabase = MusicDatabase.db
     configureTemplates()
-    configureRouting(MusicDatabase.db)
+    configureRouting()
 }
 
+// Alternative config, for use in tests
+
 fun Application.testModule() {
+    TransactionManager.defaultDatabase = TestDatabase.db
     configureTemplates()
-    configureRouting(TestDatabase.db)
+    configureRouting()
 }
 
 fun main(args: Array<String>) {
