@@ -1,6 +1,6 @@
 [versions]
 exposed = "1.0.0-rc-4"
-h2 = "2.2.224"
+h2 = "2.4.240"
 logback = "1.5.22"
 
 [libraries]
