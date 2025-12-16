@@ -1,4 +1,4 @@
-// Object representing a small test database
+// Object representing a small in-memory test database
 
 package comp2850.music.db
 
@@ -8,7 +8,7 @@ import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 object TestDatabase {
-    const val URL = "jdbc:h2:./test"
+    const val URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;"
     const val DRIVER = "org.h2.Driver"
 
     val db by lazy {

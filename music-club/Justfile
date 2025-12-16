@@ -1,6 +1,7 @@
 alias c := create
 alias q := query
 alias s := serve
+alias t := test
 
 # Show available recipes (default)
 help:
@@ -18,3 +19,7 @@ query:
 [no-exit-message]
 serve:
   ./amper run -m server
+
+# Test the web application
+test:
+  ./amper test -m server

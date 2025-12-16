@@ -2,8 +2,9 @@
 
 Web application for a music club, implemented using [Ktor][ktr], [htmx][hx],
 [Pebble][peb] templates, the [Exposed][orm] ORM framework. Also included
-is a small application that creates the music club's [H2 database][db], and
-another that demonstrates querying that database using Exposed's SQL DSL.
+is an application that populates the music club's [H2 database][db], and
+another that demonstrates querying that database. Both of these applications
+use Exposed's SQL DSL.
 
 ## Running The Demo
 
@@ -36,10 +37,14 @@ Run the server with
 
 then visit `http://0.0.0.0:8080/` to interact with the application.
 
+You can run the tests for the application with
+
+    ./amper test -m server
+
 ### Windows
 
 If you are using `cmd.exe` as your command shell, omit the `./` from the
-start of the commands shown above.
+start of the Amper commands shown above.
 
 If you are using Windows PowerShell, invoke Amper with `.\amper.bat` instead
 of `./amper`.
@@ -52,39 +57,47 @@ described above using
     just create
     just query
     just serve
+    just test
 
-You can use the single-letter abbreviations `c`, `q` and `s` for these
+You can use the single-letter abbreviations `c`, `q`, `s` and `t` for these
 recipes.
 
-## Examining The Code
+## Understanding The Code
 
-### Database
+This project is organized into four distinct Amper modules. In each module,
+code can be found in the `src` directory subtree.
 
-Amper module `database` contains all the code needed to connect to the
-databases used by the application, create the required database tables, and
-interact with those tables. This library of code is used by the query demo
-and the server.
+### `database`
+
+The `database` module contains all the code needed to represent the databases
+used by the web application. This library of code is used by the other three
+Amper modules (`create`, `query` and `server`).
 
 The database schema is defined in `Artists.kt` and `Albums.kt`. The tables
 specified in these files are mapped onto corresponding entities in
 `Artist.kt` and `Album.kt`.
 
-`MusicDatabase.kt` defines an object representing the Music Club database.
-Code to populate this database from CSV files can be found in Amper module
-`create`. (The CSV files themselves are in the `csv` subdirectory.)
+`MusicDatabase.kt` defines an object that holds a connection to the main
+Music Club database, whereas `TestDatabase.kt` defines an object to manage an
+in-memory database, suitable for testing the web application. This database
+is populated with a few rows of test data using the `create()` method.
 
-`TestDatabase.kt` defines an object representing a smaller, simpler database,
-suitable for testing the web application.
+### `create`
 
-### Query Demo
+This module contains a program in `Main.kt` that reads artist and album data
+from CSV files and uses it to populate the main Music Club database. This
+code uses Exposed's SQL DSL to insert new rows in the relevant tables.
 
-Amper module `query` contains a program in `Main.kt` that demonstrates
-the use of Exposed's SQL DSL to perform simple queries of the music club
-database.
+Sample CSV files are provided in the `csv` subdirectory of the project.
 
-### Server
+### `query`
 
-Amper module `server` contains a Ktor-based web application.
+This module contains a program in `Main.kt` that demonstrates the use of
+Exposed's SQL DSL to perform simple queries of the music club database.
+
+### `server`
+
+This module contains a Ktor-based web application.
 
 `Templates.kt` contains the configuration needed to support the use of
 Pebble templates.
@@ -99,6 +112,10 @@ in `resources/templates`.
 `Application.kt` provides the entry point for the application. It delegates
 configuration to the extension functions defined in the aforementioned files,
 and specifies a server to run the application.
+
+A few automated tests for the application can be found in `ApplicationTest.kt`,
+under the `test` directory subtree. These are not exhaustive and merely
+illustrate the approach that can bew followed.
 
 [ktr]: https://ktor.io/
 [hx]: https://htmx.org/

@@ -19,3 +19,5 @@ dependencies:
 
 test-dependencies:
   - $ktor.server.testHost
+  - $libs.kotest.assertions.core
+  - $libs.kotest.runner.junit5

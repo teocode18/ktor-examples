@@ -18,6 +18,7 @@ fun Application.module() {
 // Alternative config, for use in tests
 
 fun Application.testModule() {
+    TestDatabase.create()
     TransactionManager.defaultDatabase = TestDatabase.db
     configureTemplates()
     configureRouting()
