@@ -25,8 +25,8 @@ To test whether the database can be queried successfully, do
 
     ./amper run -m query
 
-Like `create`, with runs without logging any SQL. To see the actual SQL
-queries that are executed, as well as the query results, use this instead:
+Like `create`, this runs without logging any SQL. To see the actual SQL
+queries that are executed, as well as the query results, use
 
     ./amper run -m query -- --sql
 
@@ -66,11 +66,12 @@ interact with those tables. This library of code is used by the query demo
 and the server.
 
 The database schema is defined in `Artists.kt` and `Albums.kt`. The tables
-specified in these files are mapped into corresponding entities in
+specified in these files are mapped onto corresponding entities in
 `Artist.kt` and `Album.kt`.
 
-`MusicDatabase.kt` defines an object representing the Music Club database,
-and also provides code to populate the database with sample data.
+`MusicDatabase.kt` defines an object representing the Music Club database.
+Code to populate this database from CSV files can be found in Amper module
+`create`. (The CSV files themselves are in the `csv` subdirectory.)
 
 `TestDatabase.kt` defines an object representing a smaller, simpler database,
 suitable for testing the web application.
