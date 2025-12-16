@@ -13,6 +13,8 @@ import java.io.FileReader
 const val ARTISTS_DATA = "csv/artists.csv"
 const val ALBUMS_DATA = "csv/albums.csv"
 
+typealias NameToIdMap = LinkedHashMap<String, EntityID<UInt>>
+
 fun main(args : Array<String>) {
     val logging = args.isNotEmpty() && args[0] == "--sql"
 
@@ -29,10 +31,10 @@ fun main(args : Array<String>) {
     }
 }
 
-fun createArtists(filename: String): Map<String, EntityID<UInt>> {
+fun createArtists(filename: String): NameToIdMap {
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
-        val artists = mutableMapOf<String, EntityID<UInt>>()
+        val artists = NameToIdMap()
         for (record in records) {
             artists[record[0]] = Artists.insert {
                 it[name] = record[0]
@@ -40,15 +42,18 @@ fun createArtists(filename: String): Map<String, EntityID<UInt>> {
                 it[info] = record[2].ifEmpty { null }
             } get Artists.id
         }
-        return artists.toMap()
+        return artists
     }
 }
 
-fun createAlbums(filename: String, artists: Map<String, EntityID<UInt>>) {
+fun createAlbums(filename: String, artists: NameToIdMap) {
     FileReader(filename).use { reader ->
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
         for (record in records) {
-            val artistId = artists.getOrElse(record[1]) { continue }
+            val artistId = artists.getOrElse(record[1]) {
+                // Skip album if the named artist isn't already in the DB
+                continue
+            }
             Albums.insert {
                 it[title] = record[0]
                 it[artist] = artistId
