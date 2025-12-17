@@ -16,7 +16,7 @@ const val ALBUMS_DATA = "csv/albums.csv"
 typealias NameToIdMap = LinkedHashMap<String, EntityID<UInt>>
 
 fun main(args : Array<String>) {
-    val logging = args.isNotEmpty() && args[0] == "--sql"
+    val logging = args.isNotEmpty() && args[0].lowercase() == "--sql"
 
     transaction(MusicDatabase.db) {
         if (logging) {
