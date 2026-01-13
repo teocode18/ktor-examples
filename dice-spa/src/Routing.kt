@@ -18,7 +18,7 @@ fun Application.configureRouting() {
 
 private suspend fun ApplicationCall.displayForm() {
     respondTemplate("form.peb", model = mapOf(
-        "dieOptions" to dieOptions
+        "options" to dieOptions
     ))
 }
 
