@@ -23,8 +23,8 @@ fun main(args : Array<String>) {
             addLogger(StdOutSqlLogger)
         }
 
-        SchemaUtils.drop(Artists, Albums)
-        SchemaUtils.create(Artists, Albums)
+        SchemaUtils.drop(ArtistTable, AlbumTable)
+        SchemaUtils.create(ArtistTable, AlbumTable)
 
         val artists = addArtists(ARTISTS_DATA)
         addAlbums(ALBUMS_DATA, artists)
@@ -36,11 +36,11 @@ fun addArtists(filename: String): NameToIdMap {
         val records = CSVFormat.DEFAULT.parse(reader).drop(1)
         val artists = NameToIdMap()
         for (record in records) {
-            artists[record[0]] = Artists.insert {
+            artists[record[0]] = ArtistTable.insert {
                 it[name] = record[0]
                 it[isSolo] = record[1] == "S"
                 it[info] = record[2].ifEmpty { null }
-            } get Artists.id
+            } get ArtistTable.id
         }
         return artists
     }
@@ -54,7 +54,7 @@ fun addAlbums(filename: String, artists: NameToIdMap) {
                 // Skip album if the named artist isn't already in the DB
                 continue
             }
-            Albums.insert {
+            AlbumTable.insert {
                 it[title] = record[0]
                 it[artist] = artistId
                 it[year] = record[2].toInt()

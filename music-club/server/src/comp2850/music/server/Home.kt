@@ -4,7 +4,7 @@
 package comp2850.music.server
 
 import comp2850.music.db.Album
-import comp2850.music.db.Albums
+import comp2850.music.db.AlbumTable
 import comp2850.music.db.Artist
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.pebble.respondTemplate
@@ -23,7 +23,7 @@ suspend fun ApplicationCall.searchResults() {
     suspendTransaction {
         val formParams = receiveParameters()
         val searchTerm = formParams["search_term"] ?: ""
-        val results = Album.find { Albums.title like "%$searchTerm%" }
+        val results = Album.find { AlbumTable.title like "%$searchTerm%" }
         val data = mapOf("searchTerm" to searchTerm, "results" to results)
         respondTemplate("search.peb", data)
     }

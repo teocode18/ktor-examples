@@ -7,12 +7,12 @@ import org.jetbrains.exposed.v1.dao.UIntEntityClass
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 
 class Artist(id: EntityID<UInt>): UIntEntity(id) {
-    companion object: UIntEntityClass<Artist>(Artists)
+    companion object: UIntEntityClass<Artist>(ArtistTable)
 
-    var name by Artists.name
-    var isSolo by Artists.isSolo
-    var info by Artists.info
-    val albums by Album referrersOn Albums.artist
+    var name by ArtistTable.name
+    var isSolo by ArtistTable.isSolo
+    var info by ArtistTable.info
+    val albums by Album referrersOn AlbumTable.artist
 
     val properName: String get() {
         // Converts "family-name, given-name" format of solo artist names

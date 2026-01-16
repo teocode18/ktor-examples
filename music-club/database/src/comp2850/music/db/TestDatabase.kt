@@ -17,31 +17,31 @@ object TestDatabase {
 
     fun create() {
         transaction(db) {
-            SchemaUtils.drop(Artists, Albums)
-            SchemaUtils.create(Artists, Albums)
+            SchemaUtils.drop(ArtistTable, AlbumTable)
+            SchemaUtils.create(ArtistTable, AlbumTable)
 
-            val artist1 = Artists.insert {
+            val artist1 = ArtistTable.insert {
                 it[name] = "A Band"
-            } get Artists.id
+            } get ArtistTable.id
 
-            val artist2 = Artists.insert {
+            val artist2 = ArtistTable.insert {
                 it[name] = "Doe, John"
                 it[isSolo] = true
-            } get Artists.id
+            } get ArtistTable.id
 
-            Albums.insert {
+            AlbumTable.insert {
                 it[title] = "An Album"
                 it[artist] = artist1
                 it[year] = 2025
             }
 
-            Albums.insert {
+            AlbumTable.insert {
                 it[title] = "First Album"
                 it[artist] = artist2
                 it[year] = 2019
             }
 
-            Albums.insert {
+            AlbumTable.insert {
                 it[title] = "Second Album"
                 it[artist] = artist2
                 it[year] = 2023

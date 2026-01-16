@@ -16,16 +16,19 @@ fun main(args: Array<String>) {
             addLogger(StdOutSqlLogger)
         }
 
-        val artistCount = Artists.selectAll().count()
-        val albumCount = Albums.selectAll().count()
+        val artistCount = ArtistTable.selectAll().count()
+        val albumCount = AlbumTable.selectAll().count()
 
         println("Artists found: $artistCount")
         println("Albums found: $albumCount")
+        println()
 
-        val albums = (Albums innerJoin Artists).select(Artists.name, Albums.title)
+        val albums = (AlbumTable innerJoin ArtistTable).select(ArtistTable.name, AlbumTable.title)
 
         albums.forEach {
-            println("${it[Artists.name]} - ${it[Albums.title]}")
+            val artist = it[ArtistTable.name]
+            val album = it[AlbumTable.title]
+            println("$artist - $album")
         }
     }
 }

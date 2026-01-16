@@ -7,12 +7,12 @@ import org.jetbrains.exposed.v1.dao.UIntEntityClass
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 
 class Album(id: EntityID<UInt>): UIntEntity(id) {
-    companion object: UIntEntityClass<Album>(Albums)
+    companion object: UIntEntityClass<Album>(AlbumTable)
 
-    var artist by Artist referencedOn Albums.artist
-    var title by Albums.title
-    var year by Albums.year
-    var youtube by Albums.youtube
+    var artist by Artist referencedOn AlbumTable.artist
+    var title by AlbumTable.title
+    var year by AlbumTable.year
+    var youtube by AlbumTable.youtube
 
     override fun toString() = title
 }
