@@ -21,7 +21,7 @@ suspend fun ApplicationCall.artist() {
     suspendTransaction {
         val result = runCatching {
             parameters["id"]?.let {
-                Artist.findById(it.toUInt())
+                Artist.findById(it.toInt())
             }
         }
 

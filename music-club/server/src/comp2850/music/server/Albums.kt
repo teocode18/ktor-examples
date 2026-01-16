@@ -22,7 +22,7 @@ suspend fun ApplicationCall.album() {
     suspendTransaction {
         val result = runCatching {
             parameters["id"]?.let {
-                Album.findById(it.toUInt())
+                Album.findById(it.toInt())
             }
         }
 

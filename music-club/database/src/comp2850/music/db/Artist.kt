@@ -2,12 +2,12 @@
 
 package comp2850.music.db
 
-import org.jetbrains.exposed.v1.dao.UIntEntity
-import org.jetbrains.exposed.v1.dao.UIntEntityClass
+import org.jetbrains.exposed.v1.dao.IntEntity
+import org.jetbrains.exposed.v1.dao.IntEntityClass
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 
-class Artist(id: EntityID<UInt>): UIntEntity(id) {
-    companion object: UIntEntityClass<Artist>(ArtistTable)
+class Artist(id: EntityID<Int>): IntEntity(id) {
+    companion object: IntEntityClass<Artist>(ArtistTable)
 
     var name by ArtistTable.name
     var isSolo by ArtistTable.isSolo

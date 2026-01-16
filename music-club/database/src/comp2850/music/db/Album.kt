@@ -2,12 +2,12 @@
 
 package comp2850.music.db
 
-import org.jetbrains.exposed.v1.dao.UIntEntity
-import org.jetbrains.exposed.v1.dao.UIntEntityClass
+import org.jetbrains.exposed.v1.dao.IntEntity
+import org.jetbrains.exposed.v1.dao.IntEntityClass
 import org.jetbrains.exposed.v1.core.dao.id.EntityID
 
-class Album(id: EntityID<UInt>): UIntEntity(id) {
-    companion object: UIntEntityClass<Album>(AlbumTable)
+class Album(id: EntityID<Int>): IntEntity(id) {
+    companion object: IntEntityClass<Album>(AlbumTable)
 
     var artist by Artist referencedOn AlbumTable.artist
     var title by AlbumTable.title

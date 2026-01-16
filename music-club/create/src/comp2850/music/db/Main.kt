@@ -13,7 +13,7 @@ import java.io.FileReader
 const val ARTISTS_DATA = "csv/artists.csv"
 const val ALBUMS_DATA = "csv/albums.csv"
 
-typealias NameToIdMap = LinkedHashMap<String, EntityID<UInt>>
+typealias NameToIdMap = LinkedHashMap<String, EntityID<Int>>
 
 fun main(args : Array<String>) {
     val logging = args.isNotEmpty() && args[0].lowercase() == "--sql"
