@@ -10,6 +10,7 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.pebble.respondTemplate
 import io.ktor.server.request.receiveParameters
 import org.jetbrains.exposed.v1.core.like
+import org.jetbrains.exposed.v1.core.lowerCase
 import org.jetbrains.exposed.v1.jdbc.transactions.suspendTransaction
 
 suspend fun ApplicationCall.homePage() {
@@ -22,8 +23,8 @@ suspend fun ApplicationCall.homePage() {
 suspend fun ApplicationCall.searchResults() {
     suspendTransaction {
         val formParams = receiveParameters()
-        val searchTerm = formParams["search_term"] ?: ""
-        val results = Album.find { AlbumTable.title like "%$searchTerm%" }
+        val searchTerm = formParams["search_term"]?.lowercase() ?: ""
+        val results = Album.find { AlbumTable.title.lowerCase() like "%$searchTerm%" }
         val data = mapOf("searchTerm" to searchTerm, "results" to results)
         respondTemplate("search.peb", data)
     }
