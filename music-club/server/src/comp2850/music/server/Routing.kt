@@ -13,8 +13,8 @@ fun Application.configureRouting() {
         get("/") { call.homePage() }
         post("/search") { call.searchResults() }
         get("/artists") { call.artists() }
-        get("/artists/{id}") { call.artist() }
+        get("/artist/{id}") { call.artist() }
         get("/albums") { call.albums() }
-        get("/albums/{id}") { call.album() }
+        get("/album/{id}") { call.album() }
     }
 }

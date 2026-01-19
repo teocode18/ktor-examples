@@ -5,7 +5,7 @@
   {% else %}
   <ul>
     {% for result in results %}
-    <li><a href="albums/{{ result.id }}">{{ result.title }}</a></li>
+    <li><a href="/album/{{ result.id }}">{{ result.title }}</a></li>
     {% endfor %}
   </ul>
   {% endif %}

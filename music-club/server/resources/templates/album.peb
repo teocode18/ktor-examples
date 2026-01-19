@@ -2,7 +2,7 @@
 {% block title %}{{ title | default("?") }} - Music Club{% endblock %}
 {% block content %}
 <h2>{{ title }}</h2>
-<p>An album by <strong><a href="/artists/{{ artist.id }}">{{ artist.properName }}</a></strong></p>
+<p>An album by <strong><a href="/artist/{{ artist.id }}">{{ artist.properName }}</a></strong></p>
 <p>Released in {{ year }}</p>
 {% if youtube %}
 <iframe

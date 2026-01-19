@@ -18,7 +18,7 @@
   <tbody>
   {% for album in albums %}
     <tr>
-      <td><a href="/albums/{{ album.id }}">{{ album.title }}</a></td>
+      <td><a href="/album/{{ album.id }}">{{ album.title }}</a></td>
       <td>{{ album.year }}</td>
     </tr>
   {% endfor %}
