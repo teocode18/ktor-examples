@@ -15,10 +15,9 @@ fun Application.configureAuthentication() {
             userParamName = "username"
             passwordParamName = "password"
             validate { credentials ->
-                if (UserDatabase.checkCredentials(credentials)) {
-                    UserIdPrincipal(credentials.name)
-                } else {
-                    null
+                when (UserDatabase.checkCredentials(credentials)) {
+                    true -> UserIdPrincipal(credentials.name)
+                    false -> null
                 }
             }
             challenge {
@@ -30,10 +29,9 @@ fun Application.configureAuthentication() {
 
         session<UserSession>("auth-session") {
             validate { session ->
-                if(session.username in UserDatabase) {
-                    session
-                } else {
-                    null
+                when {
+                    session.username in UserDatabase -> session
+                    else -> null
                 }
             }
             challenge {
