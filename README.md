@@ -1,25 +1,14 @@
-# Ktor Examples
+## Library Management Web Application
 
-Examples of how to do various things using [Ktor][ktor].
+This project is a library management web application designed to help users search, borrow, and manage books efficiently. The system demonstrates the design and implementation of a relational database, user workflows, and core CRUD operations within a web-based environment.
 
-`static`: example of serving static content from the application classpath.
+## Project Overview
 
-`testing`: example of automated testing for a Ktor server.  
+The application allows users to:
 
-`html-dsl`: example of how a Ktor application can use a DSL to construct
-an HTML document dynamically and deliver it to a client.
+- Search for books by title, author, or ISBN  
+- View book availability  
+- Manage book copies and loan status  
+- Support typical library workflows for customers and staff  
 
-`dice-roller`: expansion of `html-dsl` with two separate pages, providing
-a fully interactive dice rolling application.
-
-`dice-spa`: alternative to `dice-roller`, operating as a single-page
-application, demonstrating the use of htmx and Pebble templates.
-
-`form-auth`: example of how to combine forms-based and session-based
-authentication in a Ktor application.
-
-`music-club`: a somewhat larger application, demonstrating the use of htmx
-and Pebble templates, the Exposed framework, and an H2 database backend.
-
-
-[ktor]: https://ktor.io/
+This project focuses on applying database design principles, system modelling, and user-centred design.
